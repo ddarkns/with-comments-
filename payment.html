@@ -1,0 +1,474 @@
+<!-- Save this as payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - PKJ FOODS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .payment-form {
+            display: grid;
+            grid-gap: 20px;
+            margin-top: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .checkout-summary {
+            background-color: #fff9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .pay-button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+        }
+        .pay-button:hover {
+            background-color: #ff4500;
+        }
+        .receipt {
+            display: none;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+        .order-status {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e6f7ff;
+            border-radius: 8px;
+            border-left: 5px solid #1890ff;
+        }
+        .status-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .status-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .status-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #ddd;
+            z-index: -1;
+        }
+        .step-circle {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ddd;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            margin-bottom: 5px;
+        }
+        .active .step-circle {
+            background-color: #1890ff;
+        }
+        .completed .step-circle {
+            background-color: #52c41a;
+        }
+        .copy-button {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 2px 8px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+        .copy-button:hover {
+            background-color: #e0e0e0;
+        }
+        .home-button {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+        .home-button:hover {
+            background-color: #555;
+        }
+        .success-message {
+            display: none;
+            color: #52c41a;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+    </style>
+    <script src="fun.js"></script>
+</head>
+<body>
+    <header>
+        <h1>PKJ FOODS Checkout</h1>
+        <p>Secure Payment Gateway</p>
+    </header>
+
+    <div class="container">
+        <div class="checkout-summary">
+            <h2>Order Summary</h2>
+            <div id="order-summary"></div>
+            <p id="total-amount"><strong>Total: </strong></p>
+        </div>
+
+        <form id="paymentForm" class="payment-form">
+            <div class="form-group">
+                <label>Bank Account Username</label>
+                <input type="text" id="cardholderName" placeholder="Enter your bank username" required>
+            </div>
+            <div class="form-group">
+                <label>Bank Account Password</label>
+                <input type="password" id="cardNumber" placeholder="Enter your bank password" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="john@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Select Branch</label>
+                <select id="branchSelect" required>
+                    <option value="">-- Select branch --</option>
+                    <option value="JP Nagar">Bellandur</option>
+                    <option value="Indiranagar">Bannerghatta</option>
+                    <option value="Koramangala">Koramangala</option>
+                    <option value="Whitefield">Whitefield</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Delivery Address (Bangalore Only)</label>
+                <input type="text" id="address" placeholder="Enter your complete delivery address" required>
+            </div>
+
+            <button type="submit" class="pay-button">Pay Now</button>
+        </form>
+
+        <div id="receipt" class="receipt">
+            <h2>Payment Receipt</h2>
+            <p>
+                <strong>Order ID:</strong> 
+                <span id="orderId"></span>
+                <button class="copy-button" onclick="copyOrderId()">Copy ID</button>
+                <span id="copySuccess" class="success-message">Copied!</span>
+            </p>
+            <p><strong>Date:</strong> <span id="orderDate"></span></p>
+            <p><strong>Customer:</strong> <span id="customerName"></span></p>
+            <p><strong>Amount Paid:</strong> $<span id="amountPaid"></span></p>
+            <p><strong>Delivery Branch:</strong> <span id="deliveryBranch"></span></p>
+            <p><strong>Delivery Address:</strong> <span id="deliveryAddress"></span></p>
+            <p><strong>Payment Status:</strong> <span id="paymentStatus">Successful</span></p>
+            <p class="security-note"><strong>Security Note:</strong> Please save your Order ID for tracking and reference.</p>
+            <p>Thank you for your order!</p>
+            <p>
+                <a id="trackOrderLink" href="track_order.html" style="color: #ff6347; text-decoration: none; font-weight: bold;">Track Your Order</a>
+                <a href="index.html" class="home-button">Back to Homepage</a>
+            </p>
+        </div>
+
+        <div id="orderStatus" class="order-status">
+            <h3>Track Your Order</h3>
+            <div class="status-steps">
+                <div class="status-step active" id="step1">
+                    <div class="step-circle">1</div>
+                    <div>Order Received</div>
+                </div>
+                <div class="status-step" id="step2">
+                    <div class="step-circle">2</div>
+                    <div>Preparing</div>
+                </div>
+                <div class="status-step" id="step3">
+                    <div class="step-circle">3</div>
+                    <div>On The Way</div>
+                </div>
+                <div class="status-step" id="step4">
+                    <div class="step-circle">4</div>
+                    <div>Delivered</div>
+                </div>
+            </div>
+            <p id="estimatedTime">Estimated delivery time: <span id="deliveryTime">15-20 minutes</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Get cart data from sessionStorage
+        const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+        const total = parseFloat(sessionStorage.getItem('total')) || 0;
+
+        // Display order summary
+        const orderSummary = document.getElementById('order-summary');
+        const totalAmount = document.getElementById('total-amount');
+
+        if(cart.length === 0) {
+            orderSummary.innerHTML = "<p>Your cart is empty</p>";
+            totalAmount.textContent = "Total: $0.00";
+        } else {
+            orderSummary.innerHTML = cart.map(item => `
+                <p>${item.name} - $${item.price.toFixed(2)}</p>
+            `).join('');
+            totalAmount.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+        }
+
+        // Create restaurant account if it doesn't exist
+        function setupRestaurantAccount() {
+            const restaurantUsername = "PKJfoods";
+            const restaurantPassword = "1234";
+            
+            if(!localStorage.getItem(restaurantUsername)) {
+                // Create restaurant account if it doesn't exist
+                const restaurantAccount = {
+                    username: restaurantUsername,
+                    password: restaurantPassword,
+                    flag: 0,
+                    balance: 0,
+                    withdraw: 0,
+                    depostie: 0
+                };
+                
+                localStorage.setItem(restaurantUsername, JSON.stringify(restaurantAccount));
+                console.log("Restaurant account created");
+            }
+        }
+        
+        // Call this when the page loads
+        setupRestaurantAccount();
+
+        // Handle payment form submission
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('cardholderName').value;
+            const password = document.getElementById('cardNumber').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const branch = document.getElementById('branchSelect').value;
+            
+            if (!branch) {
+                alert("Please select a branch for delivery");
+                return;
+            }
+            
+            if (!address) {
+                alert("Please enter a delivery address");
+                return;
+            }
+            
+            // Verify if user account exists and password is correct
+            if(localStorage.getItem(username)) {
+                const userAccount = JSON.parse(localStorage.getItem(username));
+                
+                if(userAccount.password === password) {
+                    // Check if user has enough balance
+                    if(userAccount.balance >= total) {
+                        // Process payment
+                        userAccount.balance -= total;
+                        localStorage.setItem(username, JSON.stringify(userAccount));
+                        
+                        // Add funds to restaurant account
+                        const restaurantAccount = JSON.parse(localStorage.getItem("PKJfoods"));
+                        restaurantAccount.balance += total;
+                        localStorage.setItem("PKJfoods", JSON.stringify(restaurantAccount));
+                        
+                        // Show receipt
+                        generateReceipt(username, email, address, branch);
+                        
+                        // Clear cart
+                        sessionStorage.removeItem('cart');
+                        sessionStorage.removeItem('total');
+                        
+                        // Show order tracking
+                        document.getElementById('orderStatus').style.display = 'block';
+                        
+                        // Start simulating order progress
+                        simulateOrderProgress();
+                    } else {
+                        alert("Insufficient funds in your account. Please add funds to your bank account.");
+                    }
+                } else {
+                    alert("Incorrect password. Please try again.");
+                }
+            } else {
+                alert("Bank account not found. Please check your username or register for a bank account.");
+            }
+        });
+        
+        // Generate receipt
+        function generateReceipt(username, email, address, branch) {
+            const receipt = document.getElementById('receipt');
+            const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+            const date = new Date().toLocaleString();
+            
+            document.getElementById('orderId').textContent = orderId;
+            document.getElementById('orderDate').textContent = date;
+            document.getElementById('customerName').textContent = username;
+            document.getElementById('amountPaid').textContent = total.toFixed(2);
+            document.getElementById('deliveryBranch').textContent = branch;
+            document.getElementById('deliveryAddress').textContent = address;
+            
+            // Update track order link with order ID
+            document.getElementById('trackOrderLink').href = `track_order.html?orderId=${orderId}`;
+            
+            receipt.style.display = 'block';
+            document.getElementById('paymentForm').style.display = 'none';
+            
+            // Save order data for tracking
+            const orderData = {
+                orderId: orderId,
+                date: date,
+                customer: username,
+                email: email,
+                address: address,
+                branch: branch,
+                items: cart,
+                total: total,
+                status: 'received'
+            };
+            
+            // Save in localStorage for tracking
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(orderData);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            // Save temporarily for immediate tracking if needed
+            // But don't rely on it for security
+            sessionStorage.setItem('currentOrder', JSON.stringify(orderData));
+        }
+        
+        // Function to copy order ID to clipboard
+        function copyOrderId() {
+            const orderIdElement = document.getElementById('orderId');
+            const orderId = orderIdElement.textContent;
+            
+            // Create a temporary element for copying
+            const tempInput = document.createElement('input');
+            tempInput.value = orderId;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            // Show success message
+            const successMessage = document.getElementById('copySuccess');
+            successMessage.style.display = 'inline';
+            
+            // Hide success message after 2 seconds
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 2000);
+        }
+        
+        // Simulate order progress
+        function simulateOrderProgress() {
+            // Step 1 is already active
+            
+            // Step 2: Preparing - after 3 minutes
+            setTimeout(function() {
+                document.getElementById('step1').classList.add('completed');
+                document.getElementById('step2').classList.add('active');
+                updateOrderStatus('preparing');
+            }, 3000); // 3 seconds for testing (simulating 3 minutes)
+            
+            // Step 3: On the way - after 5 minutes
+            setTimeout(function() {
+                document.getElementById('step2').classList.add('completed');
+                document.getElementById('step3').classList.add('active');
+                updateOrderStatus('on_the_way');
+            }, 6000); // 6 seconds for testing (simulating 5 minutes)
+            
+            // Step 4: Delivered - after 9 minutes
+            setTimeout(function() {
+                document.getElementById('step3').classList.add('completed');
+                document.getElementById('step4').classList.add('active');
+                document.getElementById('step4').classList.add('completed');
+                updateOrderStatus('delivered');
+            }, 9000); // 9 seconds for testing (simulating 9 minutes)
+        }
+        
+        // Update order status in localStorage
+        function updateOrderStatus(status) {
+            const currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
+            if (currentOrder) {
+                currentOrder.status = status;
+                localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+                
+                // Also update in orders array
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                const orderIndex = orders.findIndex(order => order.orderId === currentOrder.orderId);
+                if (orderIndex !== -1) {
+                    orders[orderIndex] = currentOrder;
+                    localStorage.setItem('orders', JSON.stringify(orders));
+                }
+            }
+            
+            // Update delivery time estimate based on status
+            const deliveryTimeElement = document.getElementById('deliveryTime');
+            if (status === 'received') {
+                deliveryTimeElement.textContent = '15-20 minutes';
+            } else if (status === 'preparing') {
+                deliveryTimeElement.textContent = '10-15 minutes';
+            } else if (status === 'on_the_way') {
+                deliveryTimeElement.textContent = '5-8 minutes';
+            } else if (status === 'delivered') {
+                document.getElementById('estimatedTime').textContent = 'Your order has been delivered!';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Reservations - PKJ FOODS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navigation {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 15px 0;
+        }
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        .navigation a:hover {
+            color: #ff6347;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .reservation-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-button {
+            background-color: #f4f4f4;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 5px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            font-size: 16px;
+        }
+        .tab-button.active {
+            background-color: #ff6347;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .seating-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .screen {
+            width: 80%;
+            height: 30px;
+            background-color: #ddd;
+            text-align: center;
+            line-height: 30px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .tables-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+        .table {
+            width: 80px;
+            height: 80px;
+            background-color: #f4f4f4;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: auto;
+        }
+        .table.selected {
+            background-color: #ff6347;
+            color: white;
+            border-color: #ff6347;
+        }
+        .table.booked {
+            background-color: #ddd;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .btn {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+        .booking-list {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .booking-list th, .booking-list td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .booking-list th {
+            background-color: #f4f4f4;
+        }
+        .home-button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .home-button:hover {
+            background-color: #555;
+        }
+        .branch-info {
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .logout-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .user-status {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PKJ FOODS Table Reservations</h1>
+    </header>
+
+    <div class="navigation">
+        <a href="index.html">Restaurant Home</a>
+        <a href="order_online.html">Order Online</a>
+        <a href="track_order.html">Track Order</a>
+        <a href="bank_system.html">Bank System</a>
+        <a href="reservation.html">Reservations</a>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="home-button">Back to Homepage</a>
+        
+        <div id="userStatus" class="user-status">
+            <div id="loginStatus">Not logged in</div>
+            <div>
+                <button id="loginButton" class="btn" onclick="redirectToLogin()">Login</button>
+                <button id="logoutButton" class="logout-button" onclick="logoutUser()" style="display: none;">Logout</button>
+            </div>
+        </div>
+
+        <div class="reservation-tabs">
+            <button class="tab-button active" onclick="openTab('makeReservation')">Make Reservation</button>
+            <button class="tab-button" onclick="openTab('viewBookings')">View All Bookings</button>
+        </div>
+
+        <div id="makeReservation" class="tab-content active">
+            <h2>Book a Table</h2>
+            <form id="reservationForm">
+                <div class="form-group">
+                    <label for="branch">Select Branch:</label>
+                    <select id="branch" onchange="loadBranchLayout()">
+                        <option value="">-- Select Branch --</option>
+                        <option value="bellandur">Bellandur Branch</option>
+                        <option value="koramangala">Koramangala Branch</option>
+                        <option value="whitefield">Whitefield Branch</option>
+                        <option value="bannerghatta">Bannerghatta Branch</option>
+                    </select>
+                    <div id="branchInfo" class="branch-info"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" min="" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Select Time Slot:</label>
+                    <select id="time" required>
+                        <option value="">-- Select Time --</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                    </select>
+                </div>
+
+                <div id="seatingLayout" class="seating-layout" style="display: none;">
+                    <div class="screen">Restaurant Layout</div>
+                    <div class="tables-container" id="tablesContainer">
+                        <!-- Tables will be generated here -->
+                    </div>
+                </div>
+
+                <button type="button" id="continueBtn" class="btn" disabled onclick="proceedToPayment()">Continue to Payment</button>
+            </form>
+        </div>
+
+        <div id="viewBookings" class="tab-content">
+            <h2>All Current Bookings</h2>
+            <div id="bookingsList">
+                <table class="booking-list">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Customer</th>
+                            <th>Branch</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Table</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <!-- Bookings will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set minimum date to today
+        document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+        // Global variables
+        let selectedTable = null;
+        let bookedTables = {};
+        
+        // Branch information
+        const branchDetails = {
+            bellandur: "WM/CG+CBW Residency Garden, Bellandur, Bengaluru, Karnataka 560103",
+            koramangala: "1234, 5th Cross, Koramangala, Bengaluru, Karnataka 560034",
+            whitefield: "5678, Main Road, Whitefield, Bengaluru, Karnataka 560066",
+            bannerghatta: "Bannerghatta, Bangaluru Karnataka. Pin – 560 083"
+        };
+        
+        // Update login status on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            updateLoginStatus();
+            // Load all bookings by default
+            loadAllBookings();
+            // Check for pending reservation on page load
+            checkPendingReservation();
+        });
+        
+        // Function to update login status display
+        function updateLoginStatus() {
+            const loggedInUser = localStorage.getItem('logged-in');
+            const loginStatus = document.getElementById('loginStatus');
+            const loginButton = document.getElementById('loginButton');
+            const logoutButton = document.getElementById('logoutButton');
+            
+            if (loggedInUser && loggedInUser !== 'none') {
+                const user = JSON.parse(loggedInUser);
+                loginStatus.textContent = `Logged in as: ${user.username}`;
+                loginButton.style.display = 'none';
+                logoutButton.style.display = 'inline-block';
+            } else {
+                loginStatus.textContent = 'Not logged in';
+                loginButton.style.display = 'inline-block';
+                logoutButton.style.display = 'none';
+            }
+        }
+        
+        // Function to logout user
+        function logoutUser() {
+            localStorage.setItem('logged-in', 'none');
+            updateLoginStatus();
+            alert('You have been logged out');
+        }
+        
+        // Function to check pending reservation
+        function checkPendingReservation() {
+            const loggedInUser = localStorage.getItem('logged-in');
+            const pendingReservation = localStorage.getItem('pendingReservation');
+            
+            if (loggedInUser && loggedInUser !== 'none' && pendingReservation) {
+                const reservation = JSON.parse(pendingReservation);
+                completeReservation(
+                    reservation.branch,
+                    reservation.date,
+                    reservation.time,
+                    reservation.table,
+                    JSON.parse(loggedInUser).username
+                );
+                localStorage.removeItem('pendingReservation');
+            }
+        }
+        
+        // Function to switch between tabs
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Deactivate all tab buttons
+            const tabButtons = document.getElementsByClassName('tab-button');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            
+            // Show the selected tab content and activate the button
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            // If viewing bookings, load all bookings
+            if (tabName === 'viewBookings') {
+                loadAllBookings();
+            }
+        }
+        
+        // Function to load the branch layout
+        function loadBranchLayout() {
+            const branch = document.getElementById('branch').value;
+            const seatingLayout = document.getElementById('seatingLayout');
+            const tablesContainer = document.getElementById('tablesContainer');
+            const branchInfo = document.getElementById('branchInfo');
+            
+            if (!branch) {
+                seatingLayout.style.display = 'none';
+                branchInfo.textContent = '';
+                return;
+            }
+            
+            // Show branch address
+            branchInfo.textContent = branchDetails[branch] || '';
+            
+            // Show the seating layout
+            seatingLayout.style.display = 'flex';
+            
+            // Clear previous tables
+            tablesContainer.innerHTML = '';
+            
+            // Generate tables for the selected branch
+            const tableCount = branch === 'bannerghatta' ? 12 : branch === 'koramangala' ? 16 : 10;
+            
+            for (let i = 1; i <= tableCount; i++) {
+                const table = document.createElement('div');
+                table.className = 'table';
+                table.textContent = `T${i}`;
+                table.dataset.table = `Table ${i}`;
+                
+                // Check if this table is booked for the selected date and time
+                table.addEventListener('click', function() {
+                    selectTable(table);
+                });
+                
+                tablesContainer.appendChild(table);
+            }
+            
+            // Update booked tables based on date and time selection
+            updateBookedTables();
+        }
+        
+        // Function to update which tables are booked
+        function updateBookedTables() {
+            const branch = document.getElementById('branch').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            if (!branch || !date || !time) return;
+            
+            // Clear all booked styles
+            const tables = document.querySelectorAll('.table');
+            tables.forEach(table => {
+                table.classList.remove('booked');
+            });
+            
+            // Get bookings from localStorage or set default
+            const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            
+            // Find bookings matching the selected criteria
+            const matchingBookings = bookings.filter(booking => 
+                booking.branch === branch && 
+                booking.date === date && 
+                booking.time === time
+            );
+            
+            // Mark booked tables
+            matchingBookings.forEach(booking => {
+                const tableNumber = booking.table.replace('Table ', '');
+                const tableEl = document.querySelector(`.table:nth-child(${tableNumber})`);
+                if (tableEl) {
+                    tableEl.classList.add('booked');
+                }
+            });
+        }
+        
+        // Function to select a table
+        function selectTable(tableElement) {
+            // Cannot select booked tables
+            if (tableElement.classList.contains('booked')) {
+                return;
+            }
+            
+            // Deselect previously selected table
+            if (selectedTable) {
+                selectedTable.classList.remove('selected');
+            }
+            
+            // Select the new table
+            tableElement.classList.add('selected');
+            selectedTable = tableElement;
+            
+            // Enable continue button
+            document.getElementById('continueBtn').disabled = false;
+        }
+        
+        // Function to proceed to payment
+        function proceedToPayment() {
+            const branch = document.getElementById('branch').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const table = selectedTable ? selectedTable.dataset.table : null;
+            
+            if (!branch || !date || !time || !table) {
+                alert('Please complete all required fields');
+                return;
+            }
+            
+            // Save reservation details temporarily
+            localStorage.setItem('pendingReservation', JSON.stringify({
+                branch,
+                date,
+                time,
+                table
+            }));
+            
+            // Check if user is logged in
+            const loggedInUser = localStorage.getItem('logged-in');
+            
+            if (!loggedInUser || loggedInUser === 'none') {
+                // Redirect to login with redirect parameter
+                window.location.href = 'bs_login.html?redirect=reservation';
+            } else {
+                // Process payment directly (we're already logged in)
+                // In a real app, we would redirect to a payment page
+                // For this demo, we'll just complete the reservation
+                completeReservation(branch, date, time, table, JSON.parse(loggedInUser).username);
+            }
+        }
+        
+        // Function to complete reservation
+        function completeReservation(branch, date, time, table, username) {
+            // Generate a booking ID
+            const bookingId = 'B' + Math.floor(100000 + Math.random() * 900000);
+            
+            // Create booking object
+            const booking = {
+                id: bookingId,
+                username: username,
+                branch: branch,
+                date: date,
+                time: time,
+                table: table,
+                status: 'Confirmed',
+                timestamp: new Date().toISOString()
+            };
+            
+            // Get existing bookings or create new array
+            const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            
+            // Add new booking
+            bookings.push(booking);
+            
+            // Save updated bookings
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+            
+            // Show confirmation and redirect
+            alert(`Booking confirmed! Your booking ID is ${bookingId}`);
+            
+            // Redirect to view bookings
+            document.querySelector('.tab-button:nth-child(2)').click();
+        }
+        
+        // Function to load all bookings
+        function loadAllBookings() {
+            const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            const bookingsTableBody = document.getElementById('bookingsTableBody');
+            bookingsTableBody.innerHTML = '';
+            
+            if (bookings.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="7">No bookings found</td>`;
+                bookingsTableBody.appendChild(row);
+                return;
+            }
+            
+            // Sort bookings by date, most recent first
+            bookings.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            bookings.forEach(booking => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${booking.id}</td>
+                    <td>${booking.username}</td>
+                    <td>${formatBranchName(booking.branch)}</td>
+                    <td>${formatDate(booking.date)}</td>
+                    <td>${formatTime(booking.time)}</td>
+                    <td>${booking.table}</td>
+                    <td>${booking.status}</td>
+                `;
+                bookingsTableBody.appendChild(row);
+            });
+        }
+        
+        // Function to redirect to login
+        function redirectToLogin() {
+            window.location.href = 'bs_login.html?redirect=reservation';
+        }
+        
+        // Helper function to format branch name
+        function formatBranchName(branch) {
+            const branchNames = {
+                bellandur: "Bellandur",
+                koramangala: "Koramangala",
+                whitefield: "Whitefield",
+                bannerghatta: "Bannerghatta"
+            };
+            return (branchNames[branch] || branch) + " Branch";
+        }
+        
+        // Helper function to format date
+        function formatDate(dateString) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+        
+        // Helper function to format time
+        function formatTime(timeString) {
+            const [hours, minutes] = timeString.split(':');
+            const hour = parseInt(hours);
+            return `${hour > 12 ? hour - 12 : hour}:${minutes} ${hour >= 12 ? 'PM' : 'AM'}`;
+        }
+        
+        // Event listeners for form fields
+        document.getElementById('date').addEventListener('change', updateBookedTables);
+        document.getElementById('time').addEventListener('change', updateBookedTables);
+    </script>
+</body>
+</html> 

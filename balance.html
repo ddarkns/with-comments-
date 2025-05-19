@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PKJ Bank - Your Balance</title>
+        <script src="fun.js"></script>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f2f5;
+                color: #333;
+                line-height: 1.6;
+            }
+            .header {
+                background-color: #ff6347;
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .header h1 {
+                margin: 0;
+                font-size: 2.2rem;
+            }
+            .container {
+                max-width: 600px;
+                margin: 40px auto;
+                padding: 30px;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            .balance-title {
+                font-size: 1.8rem;
+                color: #444;
+                margin-bottom: 20px;
+            }
+            .balance-amount {
+                font-size: 3rem;
+                font-weight: bold;
+                color: #28a745;
+                margin: 30px 0;
+                padding: 20px;
+                background-color: #f8f9fa;
+                border-radius: 10px;
+                display: inline-block;
+                min-width: 200px;
+            }
+            .btn {
+                background-color: #ff6347;
+                color: white;
+                border: none;
+                padding: 14px 30px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                text-decoration: none;
+                display: inline-block;
+                margin-top: 20px;
+            }
+            .btn:hover {
+                background-color: #e74c3c;
+            }
+            .navigation {
+                display: flex;
+                justify-content: center;
+                background-color: #333;
+                padding: 15px 0;
+            }
+            .navigation a {
+                color: white;
+                text-decoration: none;
+                margin: 0 15px;
+                font-size: 1rem;
+                transition: color 0.3s;
+            }
+            .navigation a:hover {
+                color: #ff6347;
+            }
+        </style>
+    </head>
+    <body onload="show()">
+        <div class="navigation">
+            <a href="index.html">Restaurant Home</a>
+            <a href="order_online.html">Order Online</a>
+            <a href="bank_system.html">Bank System</a>
+            <a href="system.html">Dashboard</a>
+        </div>
+
+        <div class="header">
+            <h1>PKJ Bank</h1>
+        </div>
+        
+        <div class="container">
+            <h2 class="balance-title">Your Current Balance</h2>
+            <div id="m4" class="balance-amount">Loading...</div>
+            <a href="system.html" class="btn">Back to Dashboard</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Chatbot</title>
+    <title>Order Online - PKJ FOODS</title>
+    <style>
+      
+    
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .chatbot-container {
+            width: 350px;
+            height: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .chat-header {
+            background-color: #d35400;
+            color: white;
+            padding: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            text-align: center;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .user-message {
+            background-color: #e8f4f8;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+        .bot-message {
+            background-color: #f0f0f0;
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        #send-button {
+            background-color: #d35400;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background-color: #e67e22;
+        }
+   
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 20px;
+        }
+        .category {
+            margin-bottom: 40px;
+        }
+        .category h2 {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .menu-item {
+            background-color: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-item h3 {
+            margin-top: 0;
+        }
+        .menu-item button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .menu-item button:hover {
+            background-color: #ff4500;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .cart-sidebar {
+            position: fixed;
+            right: -300px;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .cart-sidebar.open {
+            right: 0;
+        }
+        .cart-sidebar h2 {
+            margin-top: 0;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .cart-item button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .cart-item button:hover {
+            background-color: #ff4500;
+        }
+        .cart-toggle {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cart-toggle:hover {
+            background-color: #ff4500;
+        }
+        .home-button {
+            display: inline-block;
+            margin: 20px 0;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .home-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PKJ FOODS</h1>
+        <p>"Fast Food, Fabulous Mood"</p>
+        <p>"Speedy Eats, Savory Delights"</p>
+    </header>
+    <nav>
+        <a href="#">OUR BRANCHES</a>
+        <a href="#">MENUS</a>
+        <a href="#">ABOUT US</a>
+        <a href="#">EVENTS AND MORE</a>
+        <a href="#">ORDER ONLINE</a>
+        <a href="#">OTHER</a>
+        <a href="#">RESERVATIONS</a>
+    </nav>
+    <div class="container">
+        <a href="index.html" class="home-button">Back to Homepage</a>
+        
+        <div class="category">
+            <h2>Sides and Starters</h2>
+            <div class="menu-item">
+                <div>
+                    <h3>French Fries</h3>
+                    <p>Crispy golden fries served with ketchup</p>
+                    <p>$3.99</p>
+                </div>
+                <button onclick="addToCart('French Fries', 3.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Peri Peri Fries</h3>
+                    <p>Spicy peri peri seasoned fries with dip</p>
+                    <p>$4.49</p>
+                </div>
+                <button onclick="addToCart('Peri Peri Fries', 4.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Garlic Bread</h3>
+                    <p>Toasted bread with garlic butter and herbs</p>
+                    <p>$4.99</p>
+                </div>
+                <button onclick="addToCart('Garlic Bread', 4.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Chicken Nuggets</h3>
+                    <p>Crispy fried chicken nuggets (6 pieces)</p>
+                    <p>$5.99</p>
+                </div>
+                <button onclick="addToCart('Chicken Nuggets', 5.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Cheese Balls</h3>
+                    <p>Deep fried mozzarella cheese balls (8 pieces)</p>
+                    <p>$6.49</p>
+                </div>
+                <button onclick="addToCart('Cheese Balls', 6.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Chicken Wings</h3>
+                    <p>Spicy buffalo wings with blue cheese dip (8 pieces)</p>
+                    <p>$7.99</p>
+                </div>
+                <button onclick="addToCart('Chicken Wings', 7.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Chicken Popcorn</h3>
+                    <p>Crispy bite-sized chicken popcorn (10 pieces)</p>
+                    <p>$5.49</p>
+                </div>
+                <button onclick="addToCart('Chicken Popcorn', 5.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Onion Rings</h3>
+                    <p>Crispy battered onion rings with BBQ sauce</p>
+                    <p>$4.99</p>
+                </div>
+                <button onclick="addToCart('Onion Rings', 4.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Potato Wedges</h3>
+                    <p>Seasoned potato wedges with sour cream dip</p>
+                    <p>$4.99</p>
+                </div>
+                <button onclick="addToCart('Potato Wedges', 4.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Mozzarella Sticks</h3>
+                    <p>Fried mozzarella sticks with marinara sauce (6 pieces)</p>
+                    <p>$6.99</p>
+                </div>
+                <button onclick="addToCart('Mozzarella Sticks', 6.99)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="category">
+            <h2>Burgers</h2>
+            <div class="menu-item">
+                <div>
+                    <h3>Classic Cheeseburger</h3>
+                    <p>A classic cheeseburger with lettuce, tomato, and our special sauce.</p>
+                    <p>$5.99</p>
+                </div>
+                <button onclick="addToCart('Classic Cheeseburger', 5.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Bacon Burger</h3>
+                    <p>Juicy beef patty with crispy bacon and cheddar cheese.</p>
+                    <p>$6.99</p>
+                </div>
+                <button onclick="addToCart('Bacon Burger', 6.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Veggie Burger</h3>
+                    <p>A delicious veggie patty with fresh vegetables.</p>
+                    <p>$5.49</p>
+                </div>
+                <button onclick="addToCart('Veggie Burger', 5.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Double Cheeseburger</h3>
+                    <p>Double the beef, double the cheese.</p>
+                    <p>$7.99</p>
+                </div>
+                <button onclick="addToCart('Double Cheeseburger', 7.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Spicy Chicken Burger</h3>
+                    <p>Spicy chicken patty with lettuce and mayo.</p>
+                    <p>$6.49</p>
+                </div>
+                <button onclick="addToCart('Spicy Chicken Burger', 6.49)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Pizzas -->
+        <div class="category">
+            <h2>Pizzas</h2>
+            <div class="menu-item">
+                <div>
+                    <h3>Pepperoni Pizza</h3>
+                    <p>Classic pepperoni pizza with a crispy crust.</p>
+                    <p>$8.99</p>
+                </div>
+                <button onclick="addToCart('Pepperoni Pizza', 8.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Margherita Pizza</h3>
+                    <p>Tomato, mozzarella, and fresh basil.</p>
+                    <p>$7.99</p>
+                </div>
+                <button onclick="addToCart('Margherita Pizza', 7.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>BBQ Chicken Pizza</h3>
+                    <p>BBQ sauce, chicken, and onions.</p>
+                    <p>$9.99</p>
+                </div>
+                <button onclick="addToCart('BBQ Chicken Pizza', 9.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Vegetable Pizza</h3>
+                    <p>Topped with a variety of fresh vegetables.</p>
+                    <p>$8.49</p>
+                </div>
+                <button onclick="addToCart('Vegetable Pizza', 8.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Hawaiian Pizza</h3>
+                    <p>Ham, pineapple, and mozzarella.</p>
+                    <p>$9.49</p>
+                </div>
+                <button onclick="addToCart('Hawaiian Pizza', 9.49)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Sandwiches -->
+        <div class="category">
+            <h2>Sandwiches</h2>
+            <div class="menu-item">
+                <div>
+                    <h3>Grilled Chicken Sandwich</h3>
+                    <p>Grilled chicken breast with lettuce, tomato, and mayo.</p>
+                    <p>$6.99</p>
+                </div>
+                <button onclick="addToCart('Grilled Chicken Sandwich', 6.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Turkey Club Sandwich</h3>
+                    <p>Turkey, bacon, lettuce, tomato, and mayo.</p>
+                    <p>$7.49</p>
+                </div>
+                <button onclick="addToCart('Turkey Club Sandwich', 7.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Veggie Sandwich</h3>
+                    <p>Fresh vegetables with hummus.</p>
+                    <p>$5.99</p>
+                </div>
+                <button onclick="addToCart('Veggie Sandwich', 5.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>BLT Sandwich</h3>
+                    <p>Bacon, lettuce, and tomato with mayo.</p>
+                    <p>$6.49</p>
+                </div>
+                <button onclick="addToCart('BLT Sandwich', 6.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Philly Cheesesteak</h3>
+                    <p>Thinly sliced beef with melted cheese and onions.</p>
+                    <p>$8.99</p>
+                </div>
+                <button onclick="addToCart('Philly Cheesesteak', 8.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Juices -->
+        <div class="category">
+            <h2>Juices</h2>
+            <div class="menu-item">
+                <div>
+                    <h3>Orange Juice</h3>
+                    <p>Freshly squeezed orange juice.</p>
+                    <p>$3.99</p>
+                </div>
+                <button onclick="addToCart('Orange Juice', 3.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Apple Juice</h3>
+                    <p>100% pure apple juice.</p>
+                    <p>$3.49</p>
+                </div>
+                <button onclick="addToCart('Apple Juice', 3.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Carrot Juice</h3>
+                    <p>Freshly made carrot juice.</p>
+                    <p>$4.49</p>
+                </div>
+                <button onclick="addToCart('Carrot Juice', 4.49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Pineapple Juice</h3>
+                    <p>Sweet and tangy pineapple juice.</p>
+                    <p>$4.99</p>
+                </div>
+                <button onclick="addToCart('Pineapple Juice', 4.99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <h3>Mixed Berry Juice</h3>
+                    <p>A blend of strawberries, blueberries, and raspberries.</p>
+                    <p>$5.49</p>
+                </div>
+                <button onclick="addToCart('Mixed Berry Juice', 5.49)">Add to Cart</button>
+            </div>
+        </div>
+
+        
+            <div class="category">
+                <h2>Desserts</h2>
+                <div class="menu-item">
+                    <div>
+                        <h3>Chocolate Cake</h3>
+                        <p>Rich and moist chocolate cake.</p>
+                        <p>$4.99</p>
+                    </div>
+                    <button onclick="addToCart('Chocolate Cake', 4.99)">Add to Cart</button>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <h3>Cheesecake</h3>
+                        <p>Creamy cheesecake with a graham cracker crust.</p>
+                        <p>$5.49</p>
+                    </div>
+                    <button onclick="addToCart('Cheesecake', 5.49)">Add to Cart</button>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <h3>Apple Pie</h3>
+                        <p>Classic apple pie with a flaky crust.</p>
+                        <p>$4.99</p>
+                    </div>
+                    <button onclick="addToCart('Apple Pie', 4.99)">Add to Cart</button>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <h3>Ice Cream Sundae</h3>
+                        <p>Vanilla ice cream with chocolate sauce and nuts.</p>
+                        <p>$3.99</p>
+                    </div>
+                    <button onclick="addToCart('Ice Cream Sundae', 3.99)">Add to Cart</button>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <h3>Tiramisu</h3>
+                        <p>Classic Italian dessert with coffee and mascarpone.</p>
+                        <p>$5.99</p>
+                    </div>
+                    <button onclick="addToCart('Tiramisu', 5.99)">Add to Cart</button>
+                </div>
+            </div>
+    </div>
+    <!-- Add this at the end of your order_online.html -->
+
+    <footer>
+        © 2025 PKJ FOODS, all rights reserved.
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <h2>Your Cart</h2>
+        <div id="cartItems"></div>
+        <button onclick="toggleCart()">Close Cart</button>
+        <!-- Add this in your cart-sidebar div -->
+<button onclick="proceedToPayment()">Proceed to Payment</button>
+    </div>
+    <button class="cart-toggle" onclick="toggleCart()">View Cart</button>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <span>${item.name} - $${item.price.toFixed(2)}</span>
+                    <button onclick="removeFromCart(${index})">Remove</button>
+                `;
+                cartItems.appendChild(cartItem);
+                total += item.price;
+            });
+            const totalElement = document.createElement('div');
+            totalElement.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+            cartItems.appendChild(totalElement);
+        }
+
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            cartSidebar.classList.toggle('open');
+
+        }
+        function proceedToPayment() {
+    if(cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    
+    // Save cart data to sessionStorage
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    sessionStorage.setItem('total', calculateTotal());
+    window.location.href = 'payment.html';
+}
+
+function calculateTotal() {
+    return cart.reduce((sum, item) => sum + item.price, 0);
+}
+document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+
+            function addMessage(message, isUser) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+                messageDiv.textContent = message;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message) {
+                    addMessage(message, true);
+
+                    // Send message to backend
+                    fetch('/get_response', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ message: message }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        addMessage(data.response, false);
+
+                        // If the response includes an action (e.g., add to cart), handle it
+                        if (data.action === 'add_to_cart') {
+                            addToCart(data.item, data.price);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        addMessage("Sorry, I'm having trouble connecting. Please try again later.", false);
+                    });
+
+                    userInput.value = '';
+                }
+            }
+
+            function addToCart(item, price) {
+                fetch('/add_to_cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ item: item, price: price }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        addMessage(`Added ${item} to your cart!`, false);
+                    } else {
+                        addMessage("Failed to add item to cart. Please try again.", false);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    addMessage("Sorry, I'm having trouble connecting. Please try again later.", false);
+                });
+            }
+
+            sendButton.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

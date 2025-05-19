@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PKJ Bank - Login</title>
+        <script src="fun.js"></script>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f2f5;
+                color: #333;
+                line-height: 1.6;
+            }
+            .header {
+                background-color: #ff6347;
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .header h1 {
+                margin: 0;
+                font-size: 2.2rem;
+            }
+            .container {
+                max-width: 500px;
+                margin: 40px auto;
+                padding: 30px;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+            .form-group {
+                margin-bottom: 20px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 500;
+                color: #555;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 16px;
+                box-sizing: border-box;
+                transition: border-color 0.3s;
+            }
+            .form-group input:focus {
+                border-color: #ff6347;
+                outline: none;
+            }
+            .btn {
+                background-color: #ff6347;
+                color: white;
+                border: none;
+                padding: 14px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                width: 100%;
+                transition: background-color 0.3s;
+            }
+            .btn:hover {
+                background-color: #e74c3c;
+            }
+            .message {
+                margin-top: 20px;
+                padding: 10px;
+                border-radius: 5px;
+                color: #721c24;
+                background-color: #f8d7da;
+                border: 1px solid #f5c6cb;
+                display: none;
+            }
+            .navigation {
+                display: flex;
+                justify-content: center;
+                background-color: #333;
+                padding: 15px 0;
+            }
+            .navigation a {
+                color: white;
+                text-decoration: none;
+                margin: 0 15px;
+                font-size: 1rem;
+                transition: color 0.3s;
+            }
+            .navigation a:hover {
+                color: #ff6347;
+            }
+            .footer {
+                text-align: center;
+                padding: 20px;
+                background-color: #333;
+                color: white;
+                margin-top: 40px;
+            }
+            .back-link {
+                display: block;
+                text-align: center;
+                margin-top: 20px;
+                color: #ff6347;
+                text-decoration: none;
+            }
+            .back-link:hover {
+                text-decoration: underline;
+            }
+            .home-button {
+                display: inline-block;
+                margin-top: 20px;
+                background-color: #333;
+                color: white;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .home-button:hover {
+                background-color: #555;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navigation">
+            <a href="index.html">Restaurant Home</a>
+            <a href="order_online.html">Order Online</a>
+            <a href="track_order.html">Track Order</a>
+            <a href="bank_system.html">Bank System</a>
+        </div>
+
+        <div class="header">
+            <h1>PKJ Bank Login</h1>
+        </div>
+        
+        <div class="container">
+            <div class="form-group">
+                <label for="u">Username:</label>
+                <input id="u" type="text" placeholder="Enter your username">
+            </div>
+            
+            <div class="form-group">
+                <label for="p">Password:</label>
+                <input id="p" type="password" placeholder="Enter your password">
+            </div>
+            
+            <button id="b2" onclick="check()" class="btn">Login</button>
+            
+            <p id="m1" class="message"></p>
+            
+            <a href="bank_system.html" class="back-link">Back to Bank Home</a>
+            <a href="index.html" class="home-button">Back to Homepage</a>
+        </div>
+
+        <script>
+            // Show message area when there's content
+            const messageArea = document.getElementById('m1');
+            const originalCheck = window.check;
+            
+            window.check = function() {
+                originalCheck();
+                if (messageArea.innerHTML.trim() !== '') {
+                    messageArea.style.display = 'block';
+                }
+                
+                // Check if we need to redirect after successful login
+                const params = new URLSearchParams(window.location.search);
+                const redirect = params.get('redirect');
+                
+                if (redirect === 'reservation' && messageArea.innerHTML.includes('you have succesfully logged in')) {
+                    // Redirect back to reservation page
+                    setTimeout(function() {
+                        window.location.href = 'reservation.html';
+                    }, 1000);
+                }
+            };
+        </script>
+    </body>
+</html>

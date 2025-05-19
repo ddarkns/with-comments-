@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>PKJ FOODS - Menu</title>
+</head>
+
+<body class="flip-body">
+  <div class="flipbook">
+    <div class="hard">PKJ FOODS MENU<small>~ PRANAV-JAYAVEER-KRISHNA</small></div>
+    <div class="hard"></div>
+    <div>
+      <small>WELCOME TO PKJ FOODS</small>
+      <small>Enjoy our delicious menu!</small>
+    </div>
+    <div>
+      <h1>"Burgers":</h1>
+      <p>
+         "Classic Cheeseburger"---price: 5.99
+        <br>
+        "Bacon Burger"---price: 6.99
+        <br>
+        "Veggie Burger"---price: 5.49
+        <br>
+        "Double Cheeseburger"---price: 7.99
+        <br>
+        "Spicy Chicken Burger"---price: 6.49</p>
+    
+    </div>
+    <div>
+      <h1>"Pizzas":</h1>
+      <p>
+                "Pepperoni Pizza"---price: 8.99
+                <br>
+                "Margherita Pizza"---price: 7.99
+                <br>
+                "BBQ Chicken Pizza"---price: 9.99
+                <br>
+                "Vegetable Pizza"---price: 8.49
+                <br>
+                "Hawaiian Pizza"---price: 9.49
+      </p>
+    </div>
+    <div>
+      <h1>"Sandwiches":</h1>
+      <p> 
+        "Grilled Chicken Sandwich"---price: 6.99
+        <br>
+        "Turkey Club Sandwich"---price: 7.49
+        <br>
+        "Veggie Sandwich"---price: 5.99
+        <br>
+        "BLT Sandwich"---price: 6.49
+        <br>
+        "Philly Cheesesteak"---price: 8.99
+    </p>
+    </div>
+    <div>
+      <h1>"Sides & Starters":</h1>
+      <p> 
+         "French Fries"---price: 3.99
+         <br>
+        "Peri Peri Fries"---price: 4.49
+        <br>
+       "Garlic Bread"---price: 4.99
+       <br>
+       "Chicken Nuggets"---price: 5.99
+       <br>
+        "Cheese Balls"---price: 6.49
+        <br>
+        "Chicken Wings"---price: 7.99
+        <br>
+        "Onion Rings"---price: 4.99
+        <br>
+        "Potato Wedges"---price: 4.99
+        <br>
+        "Mozzarella Sticks"---price: 6.99</p>
+    </div>
+    <div>
+      <h1>  "Juices":</h1>
+      <p>
+         "Orange Juice"---price: 3.99
+         <br>
+        "Apple Juice"---price: 3.49
+        <br>
+        "Carrot Juice"---price: 4.49
+        <br>
+        "Pineapple Juice"---price: 4.99
+        <br>
+        "Mixed Berry Juice"---price: 5.49
+      </p>  
+    </div>
+    <div>
+      <h1>"Desserts":</h1>
+       
+          <div class="popup" onclick="myFunction()">cake
+            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
+          </div>
+      
+         <br>
+        "Cheesecake"---price: 5.49
+        <br>
+        "Apple Pie"---price: 4.99
+        <br>
+        "Ice Cream Sundae"---price: 3.99
+        <br>
+        "Tiramisu"---price: 5.99
+       </p>
+    </div>
+    
+    <div class="hard">Thank You <small>~ PRANAV-JAYAVEER-KRISHNA</small></div>
+    <div class="hard">
+      <p style="text-align: center; margin-top: 50px;">
+        <a href="order_online.html" style="text-decoration: none; color: #ff6347; font-weight: bold; display: block; margin-bottom: 20px; font-size: 18px;">ORDER ONLINE</a>
+        <a href="track_order.html" style="text-decoration: none; color: #ff6347; font-weight: bold; display: block; margin-bottom: 20px; font-size: 18px;">TRACK ORDER</a>
+        <a href="index.html" style="text-decoration: none; color: #ff6347; font-weight: bold; display: block; font-size: 18px;">BACK TO HOMEPAGE</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="jquery.js"></script>
+  <script src="turn.js"></script>
+  <script>
+    $(".flipbook").turn();
+    function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+  </script>
+</body>
+
+</html> 

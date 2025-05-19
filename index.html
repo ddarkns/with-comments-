@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>PKJ FOODS </title>
+  <style>
+   
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+      overflow-x: hidden;
+    }
+    
+    header {
+      background-color: #ff6347;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      letter-spacing: 1px;
+    }
+    
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.2em;
+      font-style: italic;
+    }
+    
+    nav {
+      float: center;
+      background-color: #333;
+      overflow: hidden;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav a {
+      float: center;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover {
+      background-color: #ff6347;
+      color: white;
+    }
+    
+    .main-content {
+      padding: 0;
+      margin: 0;
+    }
+    
+    .slideshow-container {
+      max-width: 100%;
+      position: relative;
+      margin: 0 auto;
+      height: 70vh;
+      overflow: hidden;
+    }
+    
+    .mySlides {
+      display: none;
+      height: 100%;
+      width: 100%;
+    }
+    
+    .mySlides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      margin-top: -22px;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.3);
+    }
+    
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+    
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+    
+    .text {
+      color: white;
+      font-size: 24px;
+      padding: 16px;
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+      text-align: center;
+      background-color: rgba(0,0,0,0.5);
+      font-weight: bold;
+    }
+    
+    .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+    }
+    
+    .dots-container {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #333;
+    }
+    
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+    
+    .active, .dot:hover {
+      background-color: #ff6347;
+    }
+    
+    .fade {
+      animation-name: fade;
+      animation-duration: 1.5s;
+    }
+    
+    @keyframes fade {
+      from {opacity: .4}
+      to {opacity: 1}
+    }
+    
+    .welcome-section {
+      padding: 50px 20px;
+      text-align: center;
+      background-color: white;
+    }
+    
+    .welcome-section h2 {
+      color: #ff6347;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    
+    .welcome-section p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 50px 20px;
+      background-color: #f5f5f5;
+    }
+    
+    .feature-box {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      width: 300px;
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-box:hover {
+      transform: translateY(-10px);
+    }
+    
+    .feature-box h3 {
+      background-color: #ff6347;
+      color: white;
+      margin: 0;
+      padding: 15px;
+      text-align: center;
+    }
+    
+    .feature-box p {
+      padding: 15px;
+      text-align: center;
+    }
+    
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
+    
+    footer p {
+      margin: 5px 0;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background-color: #ff6347;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      background-color: #e74c3c;
+    }
+    .login-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: #ff6347;
+      padding: 8px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .login-button:hover {
+      background-color: #f5f5f5;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>PKJ FOODS</h1>
+    <a href="bank_system.html" class="login-button">LOGIN / REGISTER</a>
+
+  </header>
+  
+  <nav align="center">
+    <a href="our_branches.html">OUR BRANCHES</a>
+    <a href="menu.html">MENU</a>
+    <a href="#about">ABOUT US</a>
+    <a href="#events">EVENTS</a>
+    <a href="order_online.html">ORDER ONLINE</a>
+    <a href="track_order.html">TRACK ORDER</a>
+    
+    <a href="reservation.html">RESERVATIONS</a>
+  </nav>
+  
+  <div class="main-content">
+    <div class="slideshow-container">
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 6</div>
+        <img src="img1.png" alt="Restaurant Image">
+        <div class="text">Bite Now, Worry Later!</div>
+      </div>
+      
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 6</div>
+        <img src="img2.png" alt="Restaurant Image">
+        <div class="text">Flavor at Full Speed</div>
+      </div>
+      
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 6</div>
+        <img src="img3.png" alt="Restaurant Image">
+        <div class="text">Fast. Fresh. Tasty</div>
+      </div>
+      
+      <div class="mySlides fade">
+        <div class="numbertext">4 / 6</div>
+        <img src="img4.png" alt="Restaurant Image">
+        <div class="text">Crave It? Grab It!</div>
+      </div>
+      
+      <div class="mySlides fade">
+        <div class="numbertext">5 / 6</div>
+        <img src="img5.png" alt="Dessert Image">
+        <div class="text">Satisfaction in Seconds!</div>
+      </div>
+      
+      <div class="mySlides fade">
+        <div class="numbertext">6 / 6</div>
+        <img src="img6.png" alt="Restaurant Interior">
+        <div class="text">Hungry? Don’t Wait!</div>
+      </div>
+      
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    
+    <div class="dots-container">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+      <span class="dot" onclick="currentSlide(5)"></span>
+      <span class="dot" onclick="currentSlide(6)"></span>
+    </div>
+    
+    <section class="welcome-section" id="about">
+      <h2>Welcome to PKJ FOODS</h2>
+      <p>Experience the perfect blend of traditional and modern cuisine at PKJ FOODS. Our passionate chefs bring you the finest culinary creations made from locally sourced, fresh ingredients. Whether you're looking for a romantic dinner, family celebration, or casual dining experience, we offer the perfect atmosphere with impeccable service.</p>
+      <a href="reservation.html" class="cta-button">RESERVE A TABLE</a>
+    </section>
+    
+    <section class="features">
+      <div class="feature-box">
+        <h3>Online Ordering</h3>
+        <p>Order your favorite dishes from the comfort of your home. We deliver fresh, hot meals right to your doorstep.</p>
+        <p><a href="order_online.html" class="cta-button">Order Now</a></p>
+      </div>
+      
+      <div class="feature-box">
+        <h3>Special Events</h3>
+        <p>Host your special occasions with us. We offer customized menus and decorations for birthdays, anniversaries, and corporate events.</p>
+        <p><a href="reservation.html" class="cta-button">Book Event</a></p>
+      </div>
+      
+      <div class="feature-box">
+        <h3>Exquisite Menu</h3>
+        <p>Explore our diverse menu featuring cuisines from around the world, prepared by our expert chefs using the finest ingredients.</p>
+        <p><a href="menu.html" class="cta-button">View Menu</a></p>
+      </div>
+    </section>
+  </div>
+  
+  <footer>
+    <p>WMCG+C8W Residency Garden, Bellandur, Bengaluru, Karnataka 560103</p>
+    <p>Contact: +91 8765432100 | Email: info@pkjfoods.com</p>
+    <p>&copy; 2025 PKJ FOODS, all rights reserved.</p>
+  </footer>
+  
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    
+    // Auto slideshow
+    setInterval(function() {
+      plusSlides(1);
+    }, 5000);
+    
+    // Next/previous controls
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    // Thumbnail image controls
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+    }
+  </script>
+</body>
+
+</html>
