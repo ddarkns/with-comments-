@@ -6,6 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
   <title>PKJ FOODS - Menu</title>
+  <style>
+    /* Additional styles for menu item popups */
+    .menu-item {
+      cursor: pointer;
+      color: #ff6347;
+      text-decoration: underline;
+    }
+    .popup .popuptext {
+      width: 300px;  /* Increased width for better image display */
+      padding: 10px;
+    }
+    .popup .popuptext img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 
 <body class="flip-body">
@@ -19,101 +36,196 @@
     <div>
       <h1>"Burgers":</h1>
       <p>
-         "Classic Cheeseburger"---price: 5.99
+        <div class="popup" onclick="showPopup('classic-cheeseburger')">
+          <span class="menu-item">"Classic Cheeseburger"</span>---price: 5.99
+          <span class="popuptext" id="classic-cheeseburger"><img src="classic-cheeseburger.jpg" alt="Classic Cheeseburger"></span>
+        </div>
         <br>
-        "Bacon Burger"---price: 6.99
+        <div class="popup" onclick="showPopup('bacon-burger')">
+          <span class="menu-item">"Bacon Burger"</span>---price: 6.99
+          <span class="popuptext" id="bacon-burger"><img src="bacon-burger.jpg" alt="Bacon Burger"></span>
+        </div>
         <br>
-        "Veggie Burger"---price: 5.49
+        <div class="popup" onclick="showPopup('veggie-burger')">
+          <span class="menu-item">"Veggie Burger"</span>---price: 5.49
+          <span class="popuptext" id="veggie-burger"><img src="veggie-burger.jpg" alt="Veggie Burger"></span>
+        </div>
         <br>
-        "Double Cheeseburger"---price: 7.99
+        <div class="popup" onclick="showPopup('double-cheeseburger')">
+          <span class="menu-item">"Double Cheeseburger"</span>---price: 7.99
+          <span class="popuptext" id="double-cheeseburger"><img src="double-cheeseburger.jpg" alt="Double Cheeseburger"></span>
+        </div>
         <br>
-        "Spicy Chicken Burger"---price: 6.49</p>
-    
+        <div class="popup" onclick="showPopup('spicy-chicken-burger')">
+          <span class="menu-item">"Spicy Chicken Burger"</span>---price: 6.49
+          <span class="popuptext" id="spicy-chicken-burger"><img src="spicy-chicken-burger.jpg" alt="Spicy Chicken Burger"></span>
+        </div>
+      </p>
     </div>
     <div>
       <h1>"Pizzas":</h1>
       <p>
-                "Pepperoni Pizza"---price: 8.99
-                <br>
-                "Margherita Pizza"---price: 7.99
-                <br>
-                "BBQ Chicken Pizza"---price: 9.99
-                <br>
-                "Vegetable Pizza"---price: 8.49
-                <br>
-                "Hawaiian Pizza"---price: 9.49
+        <div class="popup" onclick="showPopup('pepperoni-pizza')">
+          <span class="menu-item">"Pepperoni Pizza"</span>---price: 8.99
+          <span class="popuptext" id="pepperoni-pizza"><img src="pepperoni-pizza.jpg" alt="Pepperoni Pizza"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('margherita-pizza')">
+          <span class="menu-item">"Margherita Pizza"</span>---price: 7.99
+          <span class="popuptext" id="margherita-pizza"><img src="margherita-pizza.jpg" alt="Margherita Pizza"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('bbq-chicken-pizza')">
+          <span class="menu-item">"BBQ Chicken Pizza"</span>---price: 9.99
+          <span class="popuptext" id="bbq-chicken-pizza"><img src="bbq-chicken-pizza.jpg" alt="BBQ Chicken Pizza"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('vegetable-pizza')">
+          <span class="menu-item">"Vegetable Pizza"</span>---price: 8.49
+          <span class="popuptext" id="vegetable-pizza"><img src="vegetable-pizza.jpg" alt="Vegetable Pizza"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('hawaiian-pizza')">
+          <span class="menu-item">"Hawaiian Pizza"</span>---price: 9.49
+          <span class="popuptext" id="hawaiian-pizza"><img src="hawaiian-pizza.jpg" alt="Hawaiian Pizza"></span>
+        </div>
       </p>
     </div>
     <div>
       <h1>"Sandwiches":</h1>
       <p> 
-        "Grilled Chicken Sandwich"---price: 6.99
+        <div class="popup" onclick="showPopup('grilled-chicken-sandwich')">
+          <span class="menu-item">"Grilled Chicken Sandwich"</span>---price: 6.99
+          <span class="popuptext" id="grilled-chicken-sandwich"><img src="grilled-chicken-sandwich.jpg" alt="Grilled Chicken Sandwich"></span>
+        </div>
         <br>
-        "Turkey Club Sandwich"---price: 7.49
+        <div class="popup" onclick="showPopup('turkey-club-sandwich')">
+          <span class="menu-item">"Turkey Club Sandwich"</span>---price: 7.49
+          <span class="popuptext" id="turkey-club-sandwich"><img src="turkey-club-sandwich.jpg" alt="Turkey Club Sandwich"></span>
+        </div>
         <br>
-        "Veggie Sandwich"---price: 5.99
+        <div class="popup" onclick="showPopup('veggie-sandwich')">
+          <span class="menu-item">"Veggie Sandwich"</span>---price: 5.99
+          <span class="popuptext" id="veggie-sandwich"><img src="veggie-sandwich.jpg" alt="Veggie Sandwich"></span>
+        </div>
         <br>
-        "BLT Sandwich"---price: 6.49
+        <div class="popup" onclick="showPopup('blt-sandwich')">
+          <span class="menu-item">"BLT Sandwich"</span>---price: 6.49
+          <span class="popuptext" id="blt-sandwich"><img src="blt-sandwich.jpg" alt="BLT Sandwich"></span>
+        </div>
         <br>
-        "Philly Cheesesteak"---price: 8.99
-    </p>
+        <div class="popup" onclick="showPopup('philly-cheesesteak')">
+          <span class="menu-item">"Philly Cheesesteak"</span>---price: 8.99
+          <span class="popuptext" id="philly-cheesesteak"><img src="philly-cheesesteak.jpg" alt="Philly Cheesesteak"></span>
+        </div>
+      </p>
     </div>
     <div>
       <h1>"Sides & Starters":</h1>
       <p> 
-         "French Fries"---price: 3.99
-         <br>
-        "Peri Peri Fries"---price: 4.49
+        <div class="popup" onclick="showPopup('french-fries')">
+          <span class="menu-item">"French Fries"</span>---price: 3.99
+          <span class="popuptext" id="french-fries"><img src="french-fries.jpg" alt="French Fries"></span>
+        </div>
         <br>
-       "Garlic Bread"---price: 4.99
-       <br>
-       "Chicken Nuggets"---price: 5.99
-       <br>
-        "Cheese Balls"---price: 6.49
+        <div class="popup" onclick="showPopup('peri-peri-fries')">
+          <span class="menu-item">"Peri Peri Fries"</span>---price: 4.49
+          <span class="popuptext" id="peri-peri-fries"><img src="peri-peri-fries.jpg" alt="Peri Peri Fries"></span>
+        </div>
         <br>
-        "Chicken Wings"---price: 7.99
+        <div class="popup" onclick="showPopup('garlic-bread')">
+          <span class="menu-item">"Garlic Bread"</span>---price: 4.99
+          <span class="popuptext" id="garlic-bread"><img src="garlic-bread.jpg" alt="Garlic Bread"></span>
+        </div>
         <br>
-        "Onion Rings"---price: 4.99
+        <div class="popup" onclick="showPopup('chicken-nuggets')">
+          <span class="menu-item">"Chicken Nuggets"</span>---price: 5.99
+          <span class="popuptext" id="chicken-nuggets"><img src="chicken-nuggets.jpg" alt="Chicken Nuggets"></span>
+        </div>
         <br>
-        "Potato Wedges"---price: 4.99
+        <div class="popup" onclick="showPopup('cheese-balls')">
+          <span class="menu-item">"Cheese Balls"</span>---price: 6.49
+          <span class="popuptext" id="cheese-balls"><img src="cheese-balls.jpg" alt="Cheese Balls"></span>
+        </div>
         <br>
-        "Mozzarella Sticks"---price: 6.99</p>
+        <div class="popup" onclick="showPopup('chicken-wings')">
+          <span class="menu-item">"Chicken Wings"</span>---price: 7.99
+          <span class="popuptext" id="chicken-wings"><img src="chicken-wings.jpg" alt="Chicken Wings"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('onion-rings')">
+          <span class="menu-item">"Onion Rings"</span>---price: 4.99
+          <span class="popuptext" id="onion-rings"><img src="onion-rings.jpg" alt="Onion Rings"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('potato-wedges')">
+          <span class="menu-item">"Potato Wedges"</span>---price: 4.99
+          <span class="popuptext" id="potato-wedges"><img src="potato-wedges.jpg" alt="Potato Wedges"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('mozzarella-sticks')">
+          <span class="menu-item">"Mozzarella Sticks"</span>---price: 6.99
+          <span class="popuptext" id="mozzarella-sticks"><img src="mozzarella-sticks.jpg" alt="Mozzarella Sticks"></span>
+        </div>
+      </p>
     </div>
     <div>
-      <h1>  "Juices":</h1>
+      <h1>"Juices":</h1>
       <p>
-         "Orange Juice"---price: 3.99
-         <br>
-        "Apple Juice"---price: 3.49
+        <div class="popup" onclick="showPopup('orange-juice')">
+          <span class="menu-item">"Orange Juice"</span>---price: 3.99
+          <span class="popuptext" id="orange-juice"><img src="orange-juice.jpg" alt="Orange Juice"></span>
+        </div>
         <br>
-        "Carrot Juice"---price: 4.49
+        <div class="popup" onclick="showPopup('apple-juice')">
+          <span class="menu-item">"Apple Juice"</span>---price: 3.49
+          <span class="popuptext" id="apple-juice"><img src="apple-juice.jpg" alt="Apple Juice"></span>
+        </div>
         <br>
-        "Pineapple Juice"---price: 4.99
+        <div class="popup" onclick="showPopup('carrot-juice')">
+          <span class="menu-item">"Carrot Juice"</span>---price: 4.49
+          <span class="popuptext" id="carrot-juice"><img src="carrot-juice.jpg" alt="Carrot Juice"></span>
+        </div>
         <br>
-        "Mixed Berry Juice"---price: 5.49
+        <div class="popup" onclick="showPopup('pineapple-juice')">
+          <span class="menu-item">"Pineapple Juice"</span>---price: 4.99
+          <span class="popuptext" id="pineapple-juice"><img src="pineapple-juice.jpg" alt="Pineapple Juice"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('mixed-berry-juice')">
+          <span class="menu-item">"Mixed Berry Juice"</span>---price: 5.49
+          <span class="popuptext" id="mixed-berry-juice"><img src="mixed-berry-juice.jpg" alt="Mixed Berry Juice"></span>
+        </div>
       </p>  
     </div>
     <div>
       <h1>"Desserts":</h1>
       <p>
-          <div class="popup" onclick="myFunction()">cake
-            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
-          </div>
-      
-          <div class="popup" onclick="myFunction()">"Cheesecake"---price: 5.49
-            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
-          </div>
-           <div class="popup" onclick="myFunction()"> "Apple Pie"---price: 4.99
-            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
-          </div>
-          <div class="popup" onclick="myFunction()"> Ice Cream Sundae"---price: 3.99
-            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
-          </div>
-              <div class="popup" onclick="myFunction()"> "Tiramisu"---price: 5.99
-            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
-              </div>
-        
-       </p>
+        <div class="popup" onclick="showPopup('cake')">
+          <span class="menu-item">"Cake"</span>---price: 4.99
+          <span class="popuptext" id="cake"><img src="cake.jpg" alt="Cake"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('cheesecake')">
+          <span class="menu-item">"Cheesecake"</span>---price: 5.49
+          <span class="popuptext" id="cheesecake"><img src="cheesecake.jpg" alt="Cheesecake"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('apple-pie')">
+          <span class="menu-item">"Apple Pie"</span>---price: 4.99
+          <span class="popuptext" id="apple-pie"><img src="apple-pie.jpg" alt="Apple Pie"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('ice-cream-sundae')">
+          <span class="menu-item">"Ice Cream Sundae"</span>---price: 3.99
+          <span class="popuptext" id="ice-cream-sundae"><img src="ice-cream-sundae.jpg" alt="Ice Cream Sundae"></span>
+        </div>
+        <br>
+        <div class="popup" onclick="showPopup('tiramisu')">
+          <span class="menu-item">"Tiramisu"</span>---price: 5.99
+          <span class="popuptext" id="tiramisu"><img src="tiramisu.jpg" alt="Tiramisu"></span>
+        </div>
+      </p>
     </div>
     
     <div class="hard">Thank You <small>~ PRANAV-JAYAVEER-KRISHNA</small></div>
@@ -130,10 +242,24 @@
   <script src="turn.js"></script>
   <script>
     $(".flipbook").turn();
-    function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
+    
+    // Function to show/hide popup for any menu item
+    function showPopup(itemId) {
+      var popup = document.getElementById(itemId);
+      popup.classList.toggle("show");
+      
+      // Close popup when clicking outside
+      window.onclick = function(event) {
+        if (!event.target.matches('.menu-item')) {
+          var popups = document.getElementsByClassName("popuptext");
+          for (var i = 0; i < popups.length; i++) {
+            if (popups[i].classList.contains('show')) {
+              popups[i].classList.remove('show');
+            }
+          }
+        }
+      }
+    }
   </script>
 </body>
 
